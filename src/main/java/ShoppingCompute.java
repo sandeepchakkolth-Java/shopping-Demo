@@ -4,12 +4,6 @@ import java.util.List;
 
 /**
  * Calculates the Price of a basket of items.
- * A functional reactive solution using Java 8 and lambdas.
- * I thought I'd give a reactive solution a go, since it felt like a natural fit.
- *
- * A reactive solution is more amenable should the need arise
- * to handle a very large basket or a large number of baskets,
- * and/or calculate a running total as we shop.
  */
 public class ShoppingCalculator {
     public static final int APPLE_PRICE_EACH = 35;
