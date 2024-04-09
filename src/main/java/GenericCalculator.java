@@ -4,17 +4,17 @@ import java.util.List;
 
 
 public class GenericCalculator {
-    private Observable<BasketItem> basketObservable;
+    private Observable<Items> basketObservable;
 
     private Observable<Integer> totalPriceObservable;
 
-    public GenericCalculator(List<BasketItem> items) {
+    public GenericCalculator(List<Items> items) {
         basketObservable = Observable.from(items);
         totalPriceObservable = Observable.merge(each(), offer_b1g1f(), offer_b3fp2()).scan(0, this::sum);
     }
 
     private Observable<Integer> offer_b3fp2() {
-        return basketObservable.filter((item) -> item.onOffer(OfferEnum.BUY_THREE_FOR_THE_PRICE_OF_TWO)).buffer(3)
+        return basketObservable.filter((item) -> item.onOffer(OffersEnum.BUY_THREE_FOR_THE_PRICE_OF_TWO)).buffer(3)
                                .map((eachOffer) -> {
                                    Integer each = eachOffer.get(0).getUnitPrice();
                                    int count = eachOffer.size();
@@ -28,7 +28,7 @@ public class GenericCalculator {
     }
 
     private Observable<Integer> each() {
-        return basketObservable.filter((item) -> item.onOffer(OfferEnum.NONE)).map(BasketItem::getUnitPrice);
+        return basketObservable.filter((item) -> item.onOffer(OffersEnum.NONE)).map(Items::getUnitPrice);
     }
 
     public Observable<Integer> totalPrice() {
